@@ -1,23 +1,29 @@
 #cloud-config
-
-# Automatically update all of the packages
-package_update: true
-package_reboot_if_required: true
-apt_update: true
-apt_upgrade: true
-
-# Install Packages
 packages:
   - apache2
   - mysql-server
   - python3-pip
   - python-setuptools
   - python-dev
-  - libapache2-mod-wsgi
-  - libpq-dev
+  - expect
   - curl
   - python-letsencrypt-apache
+  - libapache2-mod-auth-mysql
+  - libmysqld-dev
+  - libapache2-mod-wsgi
+  - libpq-dev
 
+# ###########################################################
+# Automatically update all of the packages
+# ###########################################################
+package_upgrade: true
+apt_update: true
+apt_upgrade: true
+
+
+# ###########################################################
+# Create Default User
+# ###########################################################
 
 users:
   - default
@@ -62,3 +68,6 @@ write_files:
          UsePAM yes
          AllowUsers inadmin
          PasswordAuthentication no
+
+# ###########################################################
+# ###########################################################
