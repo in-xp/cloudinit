@@ -1,17 +1,4 @@
 #cloud-config
-packages:
-  - apache2
-  - mysql-server
-  - python3-pip
-  - python-setuptools
-  - python-dev
-  - expect
-  - curl
-  - python-letsencrypt-apache
-  - libapache2-mod-auth-mysql
-  - libmysqld-dev
-  - libapache2-mod-wsgi
-  - libpq-dev
 
 # ###########################################################
 # Automatically update all of the packages
@@ -19,7 +6,6 @@ packages:
 package_upgrade: true
 apt_update: true
 apt_upgrade: true
-
 
 # ###########################################################
 # Create Default User
@@ -68,6 +54,33 @@ write_files:
          UsePAM yes
          AllowUsers inadmin
          PasswordAuthentication no
+         
+# ###########################################################
+# Install Support Packages
+# ###########################################################
+
+packages:
+  - apache2
+  - mysql-server
+  - python3-pip
+  - python-setuptools
+  - python-dev
+  - expect
+  - curl
+  - python-letsencrypt-apache
+  - libapache2-mod-auth-mysql
+  - libmysqld-dev
+  - libapache2-mod-wsgi
+  - libpq-dev
 
 # ###########################################################
+# Run Mandatory Commands
 # ###########################################################
+runcmd:
+  - ufw allow 80
+  - ufw allow 443
+  - ufw allow 3273
+  - ufw enable
+  - service ssh restart
+
+
