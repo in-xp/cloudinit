@@ -77,10 +77,7 @@ packages:
 # Run Mandatory Commands
 # ###########################################################
 runcmd:
-  - ufw allow 80
-  - ufw allow 443
-  - ufw allow 3273
-  - ufw enable
-  - service ssh restart
+  - curl 
+
 
 
